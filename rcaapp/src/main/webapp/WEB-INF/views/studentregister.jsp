@@ -10,7 +10,8 @@
     body {
         font-family: Arial, sans-serif;
         background-color: #2980b9; /* High-resolution blue color */
-        color: #2980b9; /* White text color */
+        /* color: #2980b9; /* White text color */
+        color: #000;
         margin: 0;
         padding: 0;
         display: flex;
@@ -20,24 +21,24 @@
     }
     .container {
         background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
-        padding: 16px;
-        border-radius: 8px;
+        padding: 8px;
+        border-radius: 4px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         align-items: center;
     }
     .form-group {
-        margin-bottom: 16px;
+        margin-bottom: 8px;
     }
     .form-group label {
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
         font-weight: bold;
     }
     .form-group input {
         width: 96%;
-        padding: 8px;
+        padding: 4px;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 2px;
         box-sizing: border-box;
     }
     .form-group input[type="submit"] {

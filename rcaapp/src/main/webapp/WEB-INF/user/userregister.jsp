@@ -71,11 +71,11 @@
 </head>
 <body>
     <div class="container">
-        <form class="form">
+        <form class="form" action="<%= request.getContextPath()%>/userregister" method="post">
             <h2>Register</h2>
             <input type="text" placeholder="Username" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Register</button>
             <p>Already have an account? <a href="userlogin.jsp">Login here</a></p>
         </form>
