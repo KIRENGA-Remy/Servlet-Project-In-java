@@ -1,16 +1,16 @@
 package main.java.net.javaguides.model;
 
 public class Usertable {
-	private Integer id;
+	private int id;
 	private String username;
 	private String email;
 	private String password;
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -37,5 +37,4 @@ public class Usertable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 }

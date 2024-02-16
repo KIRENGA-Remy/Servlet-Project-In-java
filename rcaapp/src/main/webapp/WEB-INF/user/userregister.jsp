@@ -65,6 +65,10 @@
 
 .form a {
     color: #fff;
+    text-decoration: none;
+}
+.form a:hover{
+text-decoration-line: underline;
 }
 
     </style>
@@ -72,13 +76,14 @@
 <body>
     <div class="container">
         <form class="form" action="<%= request.getContextPath()%>/userregister" method="post">
-            <h2>Register</h2>
-            <input type="text" placeholder="Username" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Register</button>
-            <p>Already have an account? <a href="userlogin.jsp">Login here</a></p>
-        </form>
+    <h2>Register</h2>
+    <input type="text" name="username" placeholder="Username" required> <!-- Added name attribute -->
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Register</button>
+    <p>Already have an account? <a href="./userlogin.jsp">Login here</a></p>
+</form>
+
     </div>
 </body>
 </html>

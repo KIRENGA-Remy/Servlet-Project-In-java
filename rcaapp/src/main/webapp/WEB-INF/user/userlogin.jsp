@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <style>
         body {
     margin: 0;
@@ -65,19 +66,42 @@
 
 .form a {
     color: #fff;
+    text-decoration: none;
+}
+.form a:hover{
+text-decoration-line: underline;
 }
 
     </style>
 </head>
 <body>
+<input type="hidden" id="status" value="<%= request.getAttribute("status") %>" >
     <div class="container">
-        <form class="form">
-            <h2>Login</h2>
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-            <p>Don't have an account? <a href="userregister.jsp">Register here</a></p>
-        </form>
+        <form class="form" action="<%= request.getContextPath()%>/userlogin" method="post"> <!-- Added action attribute -->
+    <h2>Login</h2>
+    <input type="text" name="email" placeholder="Email" > <!-- Added name attribute -->
+    <input type="password" name="password" placeholder="Password" > <!-- Added name attribute -->
+    <button type="submit">Login</button>
+    <p>Don't have an account? <a href="./userregister.jsp">Register here</a></p>
+</form>
+
     </div>
+    
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://upkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="alert/dist/sweetalert.css">
+    <script type="text/javascript">
+    var status = document.getElementById("status").value;
+    if(status == "failed"){
+    	swal("Sorry", "Wrong email or password", "error");
+    }
+    else if(status == "invalidEmail"){
+    	swal("Sorry ", "Please Enter Email", "error");
+    }
+    else if(status == "invalidPassword"){
+    	swal("Sorry", "Please Enter Password", "error");
+    }
+    </script>
 </body>
 </html>
