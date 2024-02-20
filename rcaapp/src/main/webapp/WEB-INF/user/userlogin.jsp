@@ -82,7 +82,7 @@ text-decoration-line: underline;
     <input type="text" name="email" placeholder="Email" > <!-- Added name attribute -->
     <input type="password" name="password" placeholder="Password" > <!-- Added name attribute -->
     <button type="submit">Login</button>
-    <p>Don't have an account? <a href="./userregister.jsp">Register here</a></p>
+    <p>Don't have an account? <a href="<%= request.getContextPath()%>/userregister">Register here</a></p>
 </form>
 
     </div>

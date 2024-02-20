@@ -53,10 +53,6 @@
     <h2>Student Registration Form</h2>
     <form action="<%= request.getContextPath()%>/register" method="post">
         <div class="form-group">
-            <label for="code">Code:</label>
-            <input type="number" id="code" name="code" required>
-        </div>
-        <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
         </div>

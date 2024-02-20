@@ -11,6 +11,23 @@
             background-color: #e6e6ff; /* Blue background */
             font-family: Arial, sans-serif;
         }
+.button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button > a {
+  text-decoration: none;
+}
+.add{
+background-color: #4d94ff;
+padding: 10px;
+border: none;
+  font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
         table {
             border-collapse: collapse;
             width: 80%;
@@ -31,7 +48,11 @@
     </style>
 </head>
 <body>
-    <h2>Student Data</h2>
+    <div class="button">
+      <h2>Student Data</h2>
+      <a href="<%= request.getContextPath()%>/register"> <button class="add"> Add Student </button></a>
+
+    </div>
     <table>
         <thead>
             <tr>

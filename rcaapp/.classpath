@@ -43,5 +43,7 @@
 	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 10.1/lib/websocket-api.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 10.1/lib/websocket-client-api.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v10.1"/>
+	<classpathentry kind="lib" path="C:/Users/Remy/eclipse-workspace/Hibernate/src/main/webapp/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Remy/git/repository2/Management/src/main/webapp/WEB-INF/lib/jakarta.persistence-api-3.1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -32,22 +32,11 @@ public class StudentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String codeStr = request.getParameter("code");
 		String name = request.getParameter("name");
 		String ageStr = request.getParameter("age");
 		String school = request.getParameter("school");
 		String email = request.getParameter("email");
 		String mobilephone = request.getParameter("mobilephone");
-
-		Integer code = null;
-		try {
-			code = Integer.parseInt(codeStr);
-		} catch (NumberFormatException e) {
-			// Handle parsing exception
-			e.printStackTrace();
-		}
-
-		// Convert ageStr to Integer
 
 		Integer age = null;
 		try {
@@ -58,7 +47,6 @@ public class StudentServlet extends HttpServlet {
 		}
 
 		Student student = new Student();
-		student.setCode(code);
 		student.setName(name);
 		student.setAge(age); // Set the parsed age
 		student.setSchool(school);
@@ -74,4 +62,5 @@ public class StudentServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/studentdetails.jsp");
 		dispatcher.forward(request, response);
 	}
+
 }

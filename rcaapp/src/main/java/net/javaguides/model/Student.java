@@ -1,20 +1,35 @@
 package main.java.net.javaguides.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "student")
 public class Student {
 
-	private Integer code;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stud")
+	@SequenceGenerator(name = "stud", sequenceName = "stud", allocationSize = 2)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id;
+
 	private String name;
 	private Integer age;
 	private String school;
 	private String email;
 	private String mobilephone;
 
-	public Integer getCode() {
-		return code;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCode(Integer code) {
-		this.code = code;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -58,4 +73,3 @@ public class Student {
 	}
 
 }
-

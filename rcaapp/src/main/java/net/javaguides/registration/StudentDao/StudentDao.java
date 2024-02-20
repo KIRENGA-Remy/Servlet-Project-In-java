@@ -9,7 +9,7 @@ import main.java.net.javaguides.model.Student;
 
 public class StudentDao {
 	private static final String INSERT_SQL = "INSERT INTO student "
-			+ "(code, name, age, school, email, mobilephone) VALUES " + "(?,?, ?, ?, ?, ?)";
+			+ "(code, name, age, school, email, mobilephone) VALUES " + "(nextval('stud'), ?, ?, ?, ?, ?)";
 
 	public int registerStudent(Student student) throws ClassNotFoundException, SQLException {
 		int result = 0;
@@ -25,12 +25,11 @@ public class StudentDao {
 		try (Connection connection = DriverManager.getConnection(url, username, password);
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
 			// Set parameters for the PreparedStatement
-			preparedStatement.setInt(1, student.getCode());
-			preparedStatement.setString(2, student.getName());
-			preparedStatement.setInt(3, student.getAge());
-			preparedStatement.setString(4, student.getSchool());
-			preparedStatement.setString(5, student.getEmail());
-			preparedStatement.setString(6, student.getMobilephone());
+			preparedStatement.setString(1, student.getName());
+			preparedStatement.setInt(2, student.getAge());
+			preparedStatement.setString(3, student.getSchool());
+			preparedStatement.setString(4, student.getEmail());
+			preparedStatement.setString(5, student.getMobilephone());
 
 			// Execute the query
 			result = preparedStatement.executeUpdate();
