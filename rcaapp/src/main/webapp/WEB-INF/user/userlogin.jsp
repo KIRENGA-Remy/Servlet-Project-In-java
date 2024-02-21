@@ -29,8 +29,8 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
-    max-width: 400px; /* Set a maximum width */
-    margin: auto; /* Center the form */
+    max-width: 400px; 
+    margin: auto; 
 }
 
 .form h2 {
@@ -127,7 +127,7 @@
     // Hide the alert after 5 seconds
     setTimeout(function() {
         alertElement.style.display = 'none';
-    }, 5000);
+    }, 4000);
 </script>
 </body>
 </html>
