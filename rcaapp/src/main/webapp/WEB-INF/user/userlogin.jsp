@@ -29,6 +29,8 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
+    max-width: 400px; /* Set a maximum width */
+    margin: auto; /* Center the form */
 }
 
 .form h2 {
@@ -68,9 +70,15 @@
     color: #fff;
     text-decoration: none;
 }
-.form a:hover{
-text-decoration-line: underline;
-}
+        .form a:hover {
+            text-decoration-line: underline;
+        }
+
+        .alert {
+            color: #fff;
+            font-weight: medium;
+            display: none; /* Initially hide the alert */
+        }
 
     </style>
 </head>
@@ -81,6 +89,11 @@ text-decoration-line: underline;
     <h2>Login</h2>
     <input type="text" name="email" placeholder="Email" > <!-- Added name attribute -->
     <input type="password" name="password" placeholder="Password" > <!-- Added name attribute -->
+                    <p class="alert"> 
+            <% if ("invalidPassword".equals(request.getAttribute("status"))) { %>
+                Password: at least 8 characters, digits, symbols and both cases.
+            <% } %>
+        </p>
     <button type="submit">Login</button>
     <p>Don't have an account? <a href="<%= request.getContextPath()%>/userregister">Register here</a></p>
 </form>
@@ -103,5 +116,18 @@ text-decoration-line: underline;
     	swal("Sorry", "Please Enter Password", "error");
     }
     </script>
+    
+    <script>
+    // Get the alert element
+    var alertElement = document.querySelector('.alert');
+
+    // Show the alert
+    alertElement.style.display = 'block';
+
+    // Hide the alert after 5 seconds
+    setTimeout(function() {
+        alertElement.style.display = 'none';
+    }, 5000);
+</script>
 </body>
 </html>
