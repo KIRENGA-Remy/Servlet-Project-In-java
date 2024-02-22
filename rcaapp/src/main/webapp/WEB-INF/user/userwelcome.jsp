@@ -18,6 +18,7 @@
         max-width: 600px;
         margin: 50px auto;
         background: #fff;
+        text-align: center;
         padding: 40px;
         border-radius: 8px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -31,11 +32,12 @@
         color: #666; /* Medium gray color */
     }
     .button-container {
-        text-align: center;
-        margin-top: 30px;
+        display: flex;
+        margin: 30px 10px;
     }
     .button {
-        padding: 10px 20px;
+        padding: 8px 16px;
+        margin: 0px 4px;
         background-color: #3498db; /* Blue color */
         color: #fff;
         border: none;
@@ -54,7 +56,8 @@
     <h1>Welcome Page</h1>
     <p>We are excited to have you join us!</p>
     <div class="button-container">
-        <a href="../views/studentregister.jsp" class="button">Create Student Account</a>
+         <p>You want to become admin? <a href="<%= request.getContextPath()%>/userregister" class="button">Confirm</a></p>
+          <p> <a class="button"> Cancel</a></p>
     </div>
 </div>
 

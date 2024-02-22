@@ -34,6 +34,7 @@ public class UserServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String roles = request.getParameter("roles");
 
 		// Validate the password using a regular expression
 		String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
@@ -52,6 +53,7 @@ public class UserServlet extends HttpServlet {
 		usertable.setUsername(username);
 		usertable.setEmail(email);
 		usertable.setPassword(password);
+		usertable.setRole(roles);
 
 		try {
 			userDao.registerUser(usertable);

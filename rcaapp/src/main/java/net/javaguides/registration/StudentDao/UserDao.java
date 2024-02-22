@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import main.java.net.javaguides.model.Usertable;
 
 public class UserDao {
-	String INSERT_SQL = "INSERT INTO usertable (username, email, password) VALUES (?, ?, ?)";
+	String INSERT_SQL = "INSERT INTO usertable (username, email, password, role) VALUES (?, ?, ?, ?)";
 
 	public int registerUser(Usertable usertable) throws ClassNotFoundException, SQLException {
 		int result = 0;
@@ -27,6 +27,7 @@ public class UserDao {
 			preparedStatement.setString(1, usertable.getUsername());
 			preparedStatement.setString(2, usertable.getEmail());
 			preparedStatement.setString(3, usertable.getPassword());
+			preparedStatement.setString(4, usertable.getRole());
 
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {

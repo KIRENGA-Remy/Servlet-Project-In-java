@@ -46,4 +46,5 @@ public class Usertable {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
 }
