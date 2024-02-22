@@ -3,12 +3,47 @@ package main.java.net.javaguides.registration.StudentDao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import main.java.net.javaguides.model.Usertable;
 
 public class UserDao {
 	String INSERT_SQL = "INSERT INTO usertable (username, email, password, role) VALUES (?, ?, ?, ?)";
+
+	public boolean isEmailAvailable(String email) throws ClassNotFoundException, SQLException {
+		boolean isAvailable = true;
+
+		// Load PostgreSQL JDBC Driver
+		Class.forName("org.postgresql.Driver");
+
+		// Connection parameters
+		String url = "jdbc:postgresql://localhost:5432/student";
+		String username = "postgres";
+		String password = "remy2020";
+
+		try (Connection connection = DriverManager.getConnection(url, username, password);
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("SELECT * FROM usertable WHERE email = ?")) {
+
+			preparedStatement.setString(1, email);
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					// Email already exists
+					isAvailable = false;
+				}
+			}
+		} catch (SQLException e) {
+			// Handle database-related errors
+			e.printStackTrace();
+		} catch (Exception e) {
+			// Handle other exceptions
+			e.printStackTrace();
+		}
+
+		return isAvailable;
+	}
 
 	public int registerUser(Usertable usertable) throws ClassNotFoundException, SQLException {
 		int result = 0;
@@ -39,4 +74,5 @@ public class UserDao {
 		}
 		return result;
 	}
+
 }

@@ -1,6 +1,7 @@
 package main.java.net.javaguides.registration.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +45,26 @@ public class UserServlet extends HttpServlet {
 		if (!matcher.matches()) {
 			// Password does not meet the requirements
 			request.setAttribute("status", "invalidPassword");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/userregister.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
+		// Check if the email already exists in the database
+		boolean isEmailAvailable = false;
+		try {
+			isEmailAvailable = userDao.isEmailAvailable(email);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (!isEmailAvailable) {
+			// Email already exists in the database
+			request.setAttribute("status", "emailExists");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/userregister.jsp");
 			dispatcher.forward(request, response);
 			return;

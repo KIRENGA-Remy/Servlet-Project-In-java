@@ -21,16 +21,15 @@
             height: 100vh;
         }
 
-.form {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    max-width: 400px; /* Set a maximum width */
-    margin: auto; /* Center the form */
-}
-
+        .form {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 400px; /* Set a maximum width */
+            margin: auto; /* Center the form */
+        }
 
         .form h2 {
             margin-bottom: 20px;
@@ -79,18 +78,51 @@
             font-weight: medium;
             display: none; /* Initially hide the alert */
         }
+
+
+        .emailExists {
+            width: 40%;
+            max-width: 200px;
+            margin: 5px auto;
+            background: #fff;
+            text-align: center;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .h1 {
+            text-align: center;
+            color: #333; /* Dark gray color */
+        }
+
+        .p {
+            text-align: center;
+            color: #666; /* Medium gray color */
+        }
     </style>
 </head>
 <body>
+<% if ("emailExists".equals(request.getAttribute("status"))) { %>
+    <div class="emailExists">
+        <h1 class="h1">Notifications</h1>
+        <p class="p">Email already exists. Please use a different email.</p>
+    </div>
+<% } %>
+
+
 <div class="container">
     <form class="form" action="<%= request.getContextPath()%>/userregister" method="post">
         <h2>Register</h2>
-        <input type="text" name="username" placeholder="Username" required> <!-- Added name attribute -->
+        <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Password" required>
-                <p class="alert"> 
+        <p class="alert">
             <% if ("invalidPassword".equals(request.getAttribute("status"))) { %>
                 Password: at least 8 characters, digits, symbols and both cases.
+            <% } else if ("emailExists".equals(request.getAttribute("status"))) { %>
+                Email already exists. Please use a different email.
             <% } %>
         </p>
         <input type="radio" name="roles" value="Admin" required><label>Admin</label>
@@ -100,18 +132,23 @@
     </form>
 </div>
 
+
+
 <script>
     // Get the alert element
-    var alertElement = document.querySelector('.alert');
+    var alertElement = document.querySelector('.emailExists');
 
     // Show the alert
-    alertElement.style.display = 'block';
+    if (alertElement) {
+        alertElement.style.display = 'block';
 
-    // Hide the alert after 5 seconds
-    setTimeout(function() {
-        alertElement.style.display = 'none';
-    }, 5000);
+        // Hide the alert after 5 seconds if it's visible
+        setTimeout(function() {
+            alertElement.style.display = 'none';
+        }, 5000);
+    }
 </script>
 
 </body>
 </html>
+)
