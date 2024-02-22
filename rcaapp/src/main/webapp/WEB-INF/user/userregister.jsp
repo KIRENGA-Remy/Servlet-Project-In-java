@@ -93,6 +93,8 @@
                 Password: at least 8 characters, digits, symbols and both cases.
             <% } %>
         </p>
+        <input type="radio" name="role" required><label>Admin</label>
+        <input type="radio" name="role" required><label>Guest</label>
         <button type="submit">Register</button>
         <p>Already have an account? <a href="<%= request.getContextPath()%>/userlogin">Login here</a></p>
     </form>
