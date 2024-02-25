@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import main.java.net.javaguides.model.Usertable;
 
 public class UserDao {
-	String INSERT_SQL = "INSERT INTO usertable (username, email, password, role) VALUES (?, ?, ?, ?)";
 
 	public boolean isEmailAvailable(String email) throws ClassNotFoundException, SQLException {
 		boolean isAvailable = true;
@@ -44,6 +43,8 @@ public class UserDao {
 
 		return isAvailable;
 	}
+
+	String INSERT_SQL = "INSERT INTO usertable (username, email, password, role) VALUES (?, ?, ?, ?)";
 
 	public int registerUser(Usertable usertable) throws ClassNotFoundException, SQLException {
 		int result = 0;

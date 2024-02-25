@@ -33,6 +33,8 @@
     }
     .button-container {
         display: flex;
+        justify-content: center;
+        text-align: center;
         margin: 30px 10px;
     }
     .button {
@@ -57,7 +59,6 @@
     <p>We are excited to have you join us!</p>
     <div class="button-container">
          <p>You want to become admin? <a href="<%= request.getContextPath()%>/userregister" class="button">Confirm</a></p>
-          <p> <a class="button"> Cancel</a></p>
     </div>
 </div>
 

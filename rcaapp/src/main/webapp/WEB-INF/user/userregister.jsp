@@ -107,7 +107,7 @@
 <% if ("emailExists".equals(request.getAttribute("status"))) { %>
     <div class="emailExists">
         <h1 class="h1">Notifications</h1>
-        <p class="p">Email already exists. Please use a different email.</p>
+        <p class="p">Email already exists. Please use a different email or Login</p>
     </div>
 <% } %>
 
@@ -121,8 +121,6 @@
         <p class="alert">
             <% if ("invalidPassword".equals(request.getAttribute("status"))) { %>
                 Password: at least 8 characters, digits, symbols and both cases.
-            <% } else if ("emailExists".equals(request.getAttribute("status"))) { %>
-                Email already exists. Please use a different email.
             <% } %>
         </p>
         <input type="radio" name="roles" value="Admin" required><label>Admin</label>
@@ -148,7 +146,20 @@
         }, 5000);
     }
 </script>
+<script>
+    // Get the alert element
+    var alertPassword = document.querySelector('.alert');
+
+    // Show the alert
+    if (alertPassword) {
+    	alertPassword.style.display = 'block';
+
+        // Hide the alert after 5 seconds if it's visible
+        setTimeout(function() {
+        	alertPassword.style.display = 'none';
+        }, 5000);
+    }
+</script>
 
 </body>
 </html>
-)
