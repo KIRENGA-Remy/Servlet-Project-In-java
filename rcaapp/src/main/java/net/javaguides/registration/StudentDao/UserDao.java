@@ -1,5 +1,7 @@
 package main.java.net.javaguides.registration.StudentDao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -46,7 +48,7 @@ public class UserDao {
 
 	String INSERT_SQL = "INSERT INTO usertable (username, email, password, role) VALUES (?, ?, ?, ?)";
 
-	public int registerUser(Usertable usertable) throws ClassNotFoundException, SQLException {
+	public int registerUser(Usertable usertable) throws ClassNotFoundException, SQLException, NoSuchAlgorithmException {
 		int result = 0;
 
 		// Load PostgreSQL JDBC Driver
@@ -57,12 +59,27 @@ public class UserDao {
 		String username = "postgres";
 		String password = "remy2020";
 
+		// Hash the password using SHA-256
+		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		byte[] hash = digest.digest(usertable.getPassword().getBytes());
+		StringBuilder hexString = new StringBuilder();
+
+		for (byte b : hash) {
+			String hex = Integer.toHexString(0xff & b);
+			if (hex.length() == 1)
+				hexString.append('0');
+			hexString.append(hex);
+		}
+
+		String hashedPassword = hexString.toString();
+
+		// Insert the user into the database
 		try (Connection connection = DriverManager.getConnection(url, username, password);
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SQL)) {
 
 			preparedStatement.setString(1, usertable.getUsername());
 			preparedStatement.setString(2, usertable.getEmail());
-			preparedStatement.setString(3, usertable.getPassword());
+			preparedStatement.setString(3, hashedPassword);
 			preparedStatement.setString(4, usertable.getRole());
 
 			result = preparedStatement.executeUpdate();
