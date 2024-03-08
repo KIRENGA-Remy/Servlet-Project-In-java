@@ -1,8 +1,6 @@
 package main.java.net.javaguides.registration.controller;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,39 +37,6 @@ public class UserServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String roles = request.getParameter("roles");
 
-		// Hash the password using SHA-256
-		String hashedPassword = null;
-		try {
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(password.getBytes());
-			StringBuilder hexString = new StringBuilder();
-
-			for (byte b : hash) {
-				String hex = Integer.toHexString(0xff & b);
-				if (hex.length() == 1)
-					hexString.append('0');
-				hexString.append(hex);
-			}
-
-			hashedPassword = hexString.toString();
-		} catch (NoSuchAlgorithmException e) {
-			// Handle the error
-			e.printStackTrace();
-		}
-
-		// Validate the password using a regular expression
-		String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-		Pattern pattern = Pattern.compile(passwordRegex);
-		Matcher matcher = pattern.matcher(password);
-
-		if (!matcher.matches()) {
-			// Password does not meet the requirements
-			request.setAttribute("status", "invalidPassword");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/userregister.jsp");
-			dispatcher.forward(request, response);
-			return;
-		}
-
 		boolean isEmailAvailable = false;
 		try {
 			isEmailAvailable = userDao.isEmailAvailable(email);
@@ -91,10 +56,23 @@ public class UserServlet extends HttpServlet {
 			return;
 		}
 
+		// Validate the password using a regular expression
+		String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+		Pattern pattern = Pattern.compile(passwordRegex);
+		Matcher passwordMatcher = pattern.matcher(password);
+
+		if (!passwordMatcher.matches()) {
+			// Password does not meet the requirements
+			request.setAttribute("status", "invalidPassword");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/userregister.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+
 		Usertable usertable = new Usertable();
 		usertable.setUsername(username);
 		usertable.setEmail(email);
-		usertable.setPassword(hashedPassword); // Store the hashed password
+		usertable.setPassword(password); // Store the hashed password
 		usertable.setRole(roles);
 
 		try {
@@ -108,8 +86,8 @@ public class UserServlet extends HttpServlet {
 		request.setAttribute("registrationCompleted", true);
 
 		// Forward the request to the userlogin.jsp page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/user/userlogin.jsp");
-		dispatcher.forward(request, response);
+		RequestDispatcher dispatcherReq = request.getRequestDispatcher("/WEB-INF/user/userlogin.jsp");
+		dispatcherReq.forward(request, response);
 	}
 
 }
