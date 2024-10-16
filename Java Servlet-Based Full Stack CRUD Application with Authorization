@@ -1,0 +1,2 @@
+Create Java Servlet-Based Full Stack CRUD Application with Authorization
+This project is a full-stack web application built using Java Servlets as the backend, PostgreSQL as the database, and HTML/CSS/JavaScript for the frontend. The application allows authorized users to perform Create, Read, Update, and Delete (CRUD) operations on the data stored in the PostgreSQL database. Only authenticated and authorized users are permitted to access and interact with the application.
